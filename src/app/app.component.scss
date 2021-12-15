@@ -1,0 +1,41 @@
+nav{
+    color: white ;
+    background-color:#174168 ;
+
+    a{
+        color: white;
+    }
+
+
+    .info{
+        float: right;
+
+        p{
+            color: white;
+        }
+    }
+}
+
+#main {
+    margin-top: 50px;
+    height: auto;
+
+    .btn-add{
+        margin-bottom: 3px;
+    }
+    
+    .title{
+        color: #144069;
+        color: 144069;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+
+    table{
+        
+        td.empty{
+            background-color: #e3d9d9 !important;
+        }
+    }
+}
