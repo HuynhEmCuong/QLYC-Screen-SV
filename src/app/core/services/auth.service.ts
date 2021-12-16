@@ -9,7 +9,6 @@ export class AuthService {
   constructor(private _serviceAuth: SocialAuthService) { }
 
   signWithGoogle (){
-    debugger
     this._serviceAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(res =>{
       debugger
       let data = JSON.stringify(res)

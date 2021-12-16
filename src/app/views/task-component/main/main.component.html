@@ -8,7 +8,7 @@
         <h1 class="title">
           Danh Sách Yêu Cầu
         </h1>
-        <button class="btn btn-success btn-add">
+        <button class="btn btn-success btn-add" (click)="add.showModal()">
           <fa-icon [icon]="['fas', 'plus-square']"></fa-icon>
           Thêm
         </button>
@@ -57,3 +57,5 @@
 </main>
 
 <app-footer-component></app-footer-component>
+
+<app-add-component #add></app-add-component>
