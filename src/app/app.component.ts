@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AddComponentComponent } from './add-component/add-component.component';
+import { AuthService } from './core/services/auth.service';
+import { AddComponentComponent } from './views/task-component/add-component/add-component.component';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template:`<router-outlet> </router-outlet>`,
 })
 export class AppComponent implements OnInit, AfterViewInit {
   check:boolean =false;
@@ -15,11 +15,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // this.modal.showModal();
   }
+
+  constructor(private _auth:AuthService){}
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+   
   }
   test =() => this.check =!this.check
+
+  login = () => this._auth.signWithGoogle();
 
   
 }

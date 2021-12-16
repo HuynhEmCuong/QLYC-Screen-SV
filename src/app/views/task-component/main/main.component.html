@@ -1,0 +1,59 @@
+<app-nav>
+
+</app-nav>
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="main" class="col-12">
+        <h1 class="title">
+          Danh Sách Yêu Cầu
+        </h1>
+        <button class="btn btn-success btn-add">
+          <fa-icon [icon]="['fas', 'plus-square']"></fa-icon>
+          Thêm
+        </button>
+
+        <button class="btn btn-warning btn-add" >
+          <fa-icon [icon]="['fas', 'plus-square']"></fa-icon>
+          Test
+        </button>
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr>
+              <th scope="col">STT</th>
+              <th scope="col">Họ và Tên</th>
+              <th scope="col">Gmail</th>
+              <th scope="col">Loại yêu cầu</th>
+              <th scope="col">Ghi chú</th>
+              <th scope="col">Ngày yêu cầu</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr >
+              <td scope="row">1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Mark</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td><button class="btn btn-danger">
+                  <fa-icon [icon]="['fas', 'trash-alt']">
+                  </fa-icon>
+                </button></td>
+            </tr>
+            <tr >
+              <td colspan="8" class="empty">
+                Hiện tại bạn chưa có yêu cầu nào
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer-component></app-footer-component>
