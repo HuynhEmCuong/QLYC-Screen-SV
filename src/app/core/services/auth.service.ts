@@ -1,21 +1,54 @@
 import { Injectable } from '@angular/core';
+import { Router, UrlSegment } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import { ReplaySubject } from 'rxjs';
+import { UserToken } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private _serviceAuth: SocialAuthService) { }
+   currenUser =  new ReplaySubject<UserToken>(1);
+   jwtHelper = new JwtHelperService();
+  constructor(private _serviceAuth: SocialAuthService,
+    private _router :Router) { }
 
   signWithGoogle (){
     this._serviceAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(res =>{
-      debugger
       let data = JSON.stringify(res)
-      let test = JSON.parse(data);
-      console.log(test)
+      this.setCurrentUser(data);
+      this._router.navigateByUrl("/")
     })
   } 
+
+  setCurrentUser(value:string){
+    const data  = JSON.parse(value) 
+    let user  = new UserToken();
+    user.email  = data?.email;
+    user.userName  = data?.userName;
+    user.idToken = data?.idToken
+    user.urlImage = data?.photoUrl
+    user.getFullName(data?.firstName, data?.lastName)     
+    localStorage.setItem('user_info',JSON.stringify(user))
+    this.currenUser.next(user)
+  }
+
+  isLoggeed(){
+    let auth = localStorage.getItem('user_info') as string
+    if(auth){
+        let data = JSON.parse(auth) as UserToken;
+        this.currenUser.next(data);
+        return true
+    }
+    else return false
+  }
+
+  sigOut(){
+    localStorage.removeItem('user_info')
+    this._serviceAuth.signOut();
+    this._router.navigateByUrl("/login")
+  }
 }
 
 

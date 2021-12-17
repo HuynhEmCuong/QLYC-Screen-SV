@@ -17,6 +17,7 @@ import { FooterComponentComponent } from './views/task-component/footer-componen
 import { NavComponent } from './views/task-component/nav/nav.component';
 import { MainComponent } from './views/task-component/main/main.component';
 import { CommonModule } from '@angular/common';
+import { InfoUserComponent } from './views/task-component/nav/info-user/info-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { CommonModule } from '@angular/common';
     AddComponentComponent,
     FooterComponentComponent,
     NavComponent,
-    MainComponent
+    MainComponent,
+    InfoUserComponent
 
   ],
   imports: [

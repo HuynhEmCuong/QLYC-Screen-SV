@@ -1,15 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light ">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <h4 class="navbar-brand">EIU</h4>
 
-
-    <div class="info">
-      <p class="navbar-brand">
-        <i class="fa fa-envelope"></i>
-        em.huynh@eiu.edu.vn
-      </p>
+    <div class="info dropdown">
+        <button class="btn btn-primary dropdown-toggle login" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-user-circle-o "></i>
+          {{userToken.fullName}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" (click)="modalInfo.showModal()">Thông tin tài khoản</a>
+          <a class="dropdown-item" href="#" (click)="modalInfo.logout()">Đăng xuất</a>
+      </div>
     </div>
   </div>
-
-
 </nav>
+
+<app-info-user #modalInfo [userInfo]="userToken"></app-info-user>

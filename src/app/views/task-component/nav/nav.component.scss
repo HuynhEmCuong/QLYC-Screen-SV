@@ -2,8 +2,16 @@ nav{
     color: white ;
     background-color:#174168 ;
 
-    a{
+    h4{
         color: white;
+    }
+    
+    button.login {
+        background-color: #174168;
+        border: 1px solid #174168;
+    }
+    a.dropdown-item{
+        color :#174168
     }
 
 
@@ -13,5 +21,12 @@ nav{
         p{
             color: white;
         }
+    }
+    span {
+        cursor: pointer;
+    }
+
+    .info-sigout {
+        margin-left: 10px;
     }
 }
