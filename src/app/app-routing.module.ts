@@ -14,10 +14,7 @@ export const routes: Routes = [
         path: '',
         canActivate:[AuthGuard],
         component: MainComponent,
-        
     },
-  
-    
 ];
 
 @NgModule({

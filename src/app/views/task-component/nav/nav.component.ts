@@ -14,6 +14,7 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     this._auth.currenUser.pipe().subscribe(res => {
       this.userToken = res
+      debugger
     })
   }
 

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AppComponent } from './app.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faEnvelope, faPlusSquare, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faChevronCircleRight, faEnvelope, faPlusSquare, faTrashAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import {
@@ -18,6 +18,7 @@ import { NavComponent } from './views/task-component/nav/nav.component';
 import { MainComponent } from './views/task-component/main/main.component';
 import { CommonModule } from '@angular/common';
 import { InfoUserComponent } from './views/task-component/nav/info-user/info-user.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { InfoUserComponent } from './views/task-component/nav/info-user/info-use
   imports: [
     CommonModule,
     BrowserModule,
+    FormsModule,
     TooltipModule.forRoot(),
     FontAwesomeModule,
     ModalModule.forRoot(),
@@ -58,7 +60,7 @@ import { InfoUserComponent } from './views/task-component/nav/info-user/info-use
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faEnvelope, faTrashAlt, faPlusSquare);
+    library.addIcons(faEnvelope, faTrashAlt, faPlusSquare,faUserCircle,faChevronCircleRight);
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserToken } from 'src/app/core/models/user';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -7,13 +8,16 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  mssv:string ='';
   constructor(private _auth:AuthService) { }
 
   ngOnInit() {
     
   }
 
-  login = () => this._auth.signWithGoogle()
+  login (){
+    localStorage.setItem('mssv',this.mssv);
+    this._auth.signWithGoogle()
+  } 
 
 }

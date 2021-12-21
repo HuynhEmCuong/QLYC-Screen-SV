@@ -1,1 +1,41 @@
-<button class="btn btn-primary" (click)="login()"> Login</button>
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <div class="login">
+                <div class="login__field">
+                    <fa-icon class="button__icon" [icon]="['fas', 'user-circle']"></fa-icon>
+                    <input type="text" class="login__input" id="input" name="input" [(ngModel)]="mssv"
+                        placeholder="Mã số sinh viên" required minlength="6" maxlength="10" #input="ngModel">
+
+                        <!-- <div *ngIf="input.invalid && (input.dirty || input.touched)" class="alert">
+
+                            <div *ngIf="input.errors?.['required']">
+                                required
+                            </div>
+                            <div *ngIf="input.errors?.['maxlength']">
+                                maxlength
+                            </div>
+                            <div *ngIf="input.errors?.['minlength']">
+                                minlength
+                            </div>
+                        </div> -->
+                </div>
+                <button class="button login__submit" (click)="login()">
+                    <span class="button__text">Đăng nhập</span>
+                    <fa-icon class="button__icon" [icon]="['fas', 'chevron-circle-right']"></fa-icon>
+                </button>
+               
+
+
+            </div>
+        </div>
+
+
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+</div>
