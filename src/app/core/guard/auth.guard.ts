@@ -15,7 +15,6 @@ export class AuthGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        debugger
         if ( this._auth.isLoggeed() ==true ) {
             return true;
         }

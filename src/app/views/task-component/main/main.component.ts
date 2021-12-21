@@ -6,17 +6,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit,AfterViewInit {
+export class MainComponent implements OnInit {
 
   constructor(private _auth : AuthService) { }
-  ngAfterViewInit(): void {
-  }
 
   ngOnInit() {
    
   }
-
-  login =() => this._auth.signWithGoogle()
-  
-
 }

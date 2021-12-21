@@ -55,6 +55,11 @@ export class AuthService {
     this._serviceAuth.signOut();
     this._router.navigateByUrl("/login")
   }
+
+
+  checkUserExist(){
+    return false;
+  }
 }
 
 
