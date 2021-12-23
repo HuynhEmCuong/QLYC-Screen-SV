@@ -19,6 +19,7 @@ import { MainComponent } from './views/task-component/main/main.component';
 import { CommonModule } from '@angular/common';
 import { InfoUserComponent } from './views/task-component/nav/info-user/info-user.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,13 +33,14 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     TooltipModule.forRoot(),
     FontAwesomeModule,
     ModalModule.forRoot(),
     SocialLoginModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     {

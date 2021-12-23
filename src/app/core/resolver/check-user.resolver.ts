@@ -5,8 +5,12 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class CheckUserResolver implements Resolve<boolean> {
+    
     constructor(private _auth:AuthService){}
     resolve(route: ActivatedRouteSnapshot):  boolean {
+        this._auth.currenUser.subscribe(res =>{
+            
+        })
        return this._auth.checkUserExist();
     }
 }

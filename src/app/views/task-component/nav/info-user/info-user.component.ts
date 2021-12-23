@@ -2,8 +2,9 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, View
 import { ActivatedRoute } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { map } from 'rxjs';
-import { UserToken } from 'src/app/core/models/user';
+import { UserToken } from 'src/app/core/models/student/user';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { StudentService } from 'src/app/core/services/student.service';
 
 @Component({
   selector: 'app-info-user',
@@ -13,22 +14,20 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class InfoUserComponent implements OnInit, AfterViewInit {
   @ViewChild('modalInfo', { static: false }) modalInfo!: ModalDirective;
   @Input() userInfo: UserToken = new UserToken()
-  check: boolean = true;
 
 
   constructor(private _auth: AuthService,
-    private _route: ActivatedRoute) { }
-    ngAfterViewInit(): void {
-    console.log(this.check)
-    if(this.check)
-      this.showModal();
+    private _route: ActivatedRoute,
+    private _studentService: StudentService) { }
+
+
+  ngAfterViewInit(): void {
+
 
   }
 
   ngOnInit() {
-    this._route.data.subscribe(res => {
-      this.check = res['checkUser']
-    })
+
   }
 
 

@@ -1,10 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router, UrlSegment } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
-import { ReplaySubject } from 'rxjs';
-import { UserToken } from '../models/user';
+import { firstValueFrom, lastValueFrom, map, ReplaySubject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { OperationResult } from '../models/general/operation-result';
+import { StudentViewModel, UserToken } from '../models/student/user';
 
+
+
+const API = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -12,32 +18,35 @@ export class AuthService {
   currenUser = new ReplaySubject<UserToken>(1);
   jwtHelper = new JwtHelperService();
   constructor(private _serviceAuth: SocialAuthService,
-    private _router: Router) { }
+    private _router: Router,
+    private _http: HttpClient) { }
 
   signWithGoogle() {
-    this._serviceAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(res => {
+    this._serviceAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(async res => {
       let data = JSON.stringify(res)
-      this.setCurrentUser(data);
-      this._router.navigateByUrl("/")
-    }, error =>{
+      await this.setCurrentUser(data);
+      this._router.navigateByUrl("/");
+    }, error => {
       if (error) alert('please allow popup for this app')
     })
   }
 
-  setCurrentUser(value: string) {
+  async setCurrentUser(value: string) {
+ 
     const data = JSON.parse(value)
-    let mssv = localStorage.getItem('mssv') || "" 
-    const user  = new UserToken();
-    user.mssv = mssv;
+    let mssv = localStorage.getItem('mssv') || ""
+    const user = new UserToken();
+    user.studentIdNew = mssv;
+    user.studentId = mssv;
     user.email = data?.email;
     user.userName = data?.userName;
     user.idToken = data?.idToken
     user.urlImage = data?.photoUrl
     user.getFullName(data?.firstName, data?.lastName)
-
-    localStorage.removeItem('mssv');
-    localStorage.setItem('user_info', JSON.stringify(user))
+    
+    const test = await this.checkStudentExsit(user);
     this.currenUser.next(user)
+    localStorage.setItem('user_info', JSON.stringify(user))
   }
 
   isLoggeed() {
@@ -57,7 +66,15 @@ export class AuthService {
   }
 
 
-  checkUserExist(){
+  async checkStudentExsit(model: UserToken) {
+    const data$ = this._http.post<OperationResult>(`${API}/Student/CheckUserExist`, model)
+    return await firstValueFrom(data$)
+  }
+
+
+
+  checkUserExist() {
+
     return false;
   }
 }
