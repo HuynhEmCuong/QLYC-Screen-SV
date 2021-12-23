@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, map } from 'rxjs';
+import { lastValueFrom, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OperationResult } from '../models/general/operation-result';
 import { UserToken } from '../models/student/user';
@@ -25,8 +25,7 @@ export class StudentService {
   }
 
 
-  updateInfo = (model: UserToken) => this._http.post(`${API}/Student/UpdateStudent`, model)
-
+  updateInfo = (model: UserToken): Observable<OperationResult> => this._http.post<OperationResult>(`${API}/Student/UpdateStudent`, model)
 
 
 

@@ -47,12 +47,12 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">Số điện thoại</span>
               </div>
-              <input type="text" class="form-control">
+              <input type="text"  [(ngModel)]="userInfo.mobi" class="form-control">
             </div>
           </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success">Lưu</button>
+        <button class="btn btn-success" (click)="update()">Lưu</button>
       </div>
     </div>
   </div>

@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
+import { OperationResult } from 'src/app/core/models/general/operation-result';
 import { UserToken } from 'src/app/core/models/student/user';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { StudentService } from 'src/app/core/services/student.service';
+import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';
 
 @Component({
   selector: 'app-info-user',
@@ -14,26 +16,55 @@ import { StudentService } from 'src/app/core/services/student.service';
 export class InfoUserComponent implements OnInit, AfterViewInit {
   @ViewChild('modalInfo', { static: false }) modalInfo!: ModalDirective;
   @Input() userInfo: UserToken = new UserToken()
+  @Output() user = new EventEmitter<UserToken>();
 
 
   constructor(private _auth: AuthService,
     private _route: ActivatedRoute,
-    private _studentService: StudentService) { }
+    private _studentService: StudentService,
+    private _alert: SweetalertService) { }
+
 
 
   ngAfterViewInit(): void {
-
-
+    let studentId = this.userInfo.studentId;
+    let studentIdNew = this.userInfo.studentIdNew;
+    if (studentId != studentIdNew) {
+      this._alert.confirm("Cảnh báo", `Mã số sinh viên của bạn
+      ${studentId} đã bị thay đổi thành ${studentIdNew}. Bạn có muốn thay đổi không ?`, () => {
+        this.userInfo.studentId = studentIdNew;
+        this.update();
+      })
+    }
   }
 
   ngOnInit() {
 
   }
 
+  update() {
+    this._studentService.updateInfo(this.userInfo).pipe(
+      tap(res => { 
+        this._auth.currenUser.next(res.data);
+      })
+    ).subscribe(res => {
+      if (res.success) {
+        
+        this.userInfo.studentId = res.data.studentId;
+        this.userInfo.mobi = res.data.mobi;
+        this._alert.successMin(res.message);
+        this._auth.setUserToken(this.userInfo)
+        this.hideModal();
+      } else {
+        this._alert.error("Lỗi server, vui lòng thử lại ")
+      }
+    })
+  }
+
 
   showModal = () => this.modalInfo.show();
+  hideModal = () => this.modalInfo.hide();
+  logOut = () => this._auth.sigOut();
 
-  logout() {
-    this._auth.sigOut()
-  }
+
 }

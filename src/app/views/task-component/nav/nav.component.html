@@ -3,17 +3,16 @@
     <h4 class="navbar-brand">EIU</h4>
 
     <div class="info dropdown">
-      <button class="btn btn-danger" (click)="test()">Test</button>
         <button class="btn btn-primary dropdown-toggle login" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
           <i class="fa fa-user-circle-o "></i>
           {{userToken.fullName}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#" (click)="modalInfo.showModal()">Thông tin tài khoản</a>
-          <a class="dropdown-item" href="#" (click)="modalInfo.logout()">Đăng xuất</a>
+          <a class="dropdown-item" href="#" (click)="modalInfo.logOut()">Đăng xuất</a>
       </div>
     </div>
   </div>
 </nav>
 
-<app-info-user #modalInfo [userInfo]="userToken"></app-info-user>
+<app-info-user #modalInfo [userInfo]="userToken" (userToken)="update($event)"></app-info-user>

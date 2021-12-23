@@ -1,7 +1,7 @@
 
 export interface OperationResult {
-    StatusCode: number;
-    Message: string;
-    Success: boolean;
-    Data: any;
+    statusCode: number;
+    message: string;
+    success: boolean;
+    data: any;
 }

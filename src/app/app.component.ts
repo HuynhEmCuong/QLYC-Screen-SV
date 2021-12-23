@@ -19,9 +19,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(private _auth:AuthService){}
   
   ngOnInit(): void {
-   
+   this.setCurrenUser()
   }
   test =() => this.check =!this.check
+
+
+   setCurrenUser(){
+     debugger
+    let auth =JSON.parse(localStorage.getItem('user_info') as string) 
+    if(auth)
+      this._auth.setUserToken(auth);
+  }
 
   login = () => this._auth.signWithGoogle();
 

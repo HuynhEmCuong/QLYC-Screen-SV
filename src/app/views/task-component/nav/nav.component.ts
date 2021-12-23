@@ -10,9 +10,7 @@ import { InfoUserComponent } from './info-user/info-user.component';
 })
 export class NavComponent implements OnInit {
   @ViewChild(InfoUserComponent) userModal!: InfoUserComponent
-
   userToken: UserToken = new UserToken()
-  listUser: UserToken[] = [];
   constructor(
     private _auth: AuthService,
     private _studenService: StudentService) { }
@@ -22,11 +20,8 @@ export class NavComponent implements OnInit {
       this.userToken = res;
     })
   }
-
-
-  test() {
-    this._studenService.getAll().subscribe(res => {
-      this.listUser = res;
-    })
+  update($value: any) {
+    debugger
+    this.userToken = $value
   }
 }
