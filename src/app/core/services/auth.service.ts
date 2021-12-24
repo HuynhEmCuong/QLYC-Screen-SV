@@ -43,7 +43,7 @@ export class AuthService {
 
     user.studentId = mssv;
     user.email = data?.email;
-    user.getFullName(data?.firstName, data?.lastName)
+    user.fullName = data?.name;
 
     //Check user exsit and get info studentId vs Mobi
     const result = await this.checkStudentExsit(user);

@@ -1,5 +1,6 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { interval, take } from 'rxjs';
 import { RequestType } from 'src/app/core/models/student/request-type';
 import { UserToken } from 'src/app/core/models/student/student';
 import { StudentTask } from 'src/app/core/models/student/student-task';
@@ -15,22 +16,30 @@ import { SweetalertService } from 'src/app/core/services/system/sweetalert.servi
 })
 export class AddComponentComponent implements OnInit {
   @ViewChild('lgModal', { static: false }) modalAdd!: ModalDirective;
-  student: UserToken = new UserToken();
+  @Output() checkLoad = new EventEmitter();
+  @Input() student: UserToken = new UserToken()
   requestTypes: RequestType[] = [];
   studentTask: StudentTask = new StudentTask()
+  quantities: Quantity[] = []
+
 
   constructor(private _requestType: RequestTypeService,
-    private _auth: AuthService,
+
     private _studentTask: StudentTaskService,
     private _alert: SweetalertService
   ) {
-    this._auth.currenUser.pipe().subscribe(res => {
-      this.student = res;
-    })
+
   }
 
   ngOnInit() {
     this.getRequestType();
+    this.getQuantity() ;
+  }
+  getQuantity() {
+    interval(10).pipe(take(11)).subscribe(res => {
+      let quantity:Quantity  =new Quantity(res,res)
+      this.quantities.push(quantity);
+    })
   }
 
   getRequestType() {
@@ -44,7 +53,9 @@ export class AddComponentComponent implements OnInit {
     const result = await this._studentTask.addTask(this.studentTask)
     if (result.success) {
       this._alert.successMin(result.message);
+      this.studentTask = new StudentTask()
       this.hideModal();
+      this.checkLoad.emit(true)
     } else {
       this._alert.error("Lỗi hệ thống")
     }
@@ -53,4 +64,13 @@ export class AddComponentComponent implements OnInit {
 
   showModal = () => this.modalAdd.show();
   hideModal = () => this.modalAdd.hide();
+}
+
+export class Quantity {
+  id: number = 0;
+  value: number = 0;
+  constructor(id:number , value:number){
+    this.id = id;
+    this.value = value;
+  }
 }

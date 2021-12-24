@@ -21,7 +21,6 @@ export class NavComponent implements OnInit {
     })
   }
   update($value: any) {
-    debugger
     this.userToken = $value
   }
 }

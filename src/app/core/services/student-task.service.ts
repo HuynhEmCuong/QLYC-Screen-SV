@@ -17,6 +17,10 @@ export class StudentTaskService {
   async addTask(data: StudentTask) {
     return firstValueFrom(this._http.post<OperationResult>(`${API}/StudentTask/AddUserTask`, data))
   }
+
+  getAllTaskById(id: number) {
+    return this._http.get<StudentTask[]>(`${API}/StudentTask/GetAllByStudentId?id=${id}`)
+  }
 }
 
 

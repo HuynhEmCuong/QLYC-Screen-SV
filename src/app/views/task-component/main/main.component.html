@@ -17,8 +17,9 @@
             <tr>
               <th scope="col">STT</th>
               <th scope="col">Họ và Tên</th>
-              <th scope="col">Gmail</th>
+              <th scope="col">Mã số sinh viên</th>
               <th scope="col">Loại yêu cầu</th>
+              <th scope="col">Số lượng</th>
               <th scope="col">Ghi chú</th>
               <th scope="col">Ngày yêu cầu</th>
               <th scope="col">Trạng thái</th>
@@ -26,20 +27,27 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="row">1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td><button class="btn btn-danger">
+            <tr *ngFor="let task of stuentTasks;  let i = index">
+              <td scope="row">{{i+1}}</td>
+              <td>{{task.student?.fullName}}</td>
+              <td>{{task.student?.studentId}}</td>
+              <td>{{task.requestType?.name}}</td>
+              <td>{{task.quantity}}</td>
+              <td>{{task.note}}</td>
+              <td>{{task.createDate |date: 'dd/MM/yyyy'}}</td>
+              <td>
+                <span [ngClass]="task.status==1 ? 'send': task.status==2 ? 'doing':'success' ">
+                  {{task.status |taskstatus}}
+                </span>
+
+              </td>
+              <td>
+                <button class="btn btn-danger" *ngIf="task.status==1">
                   <fa-icon [icon]="['fas', 'trash-alt']">
                   </fa-icon>
                 </button></td>
             </tr>
-            <tr >
+            <tr *ngIf="stuentTasks.length ==0">
               <td colspan="8" class="empty">
                 Hiện tại bạn chưa có yêu cầu nào
               </td>
@@ -53,4 +61,4 @@
 
 <app-footer-component></app-footer-component>
 
-<app-add-component #add></app-add-component>
+<app-add-component #add [student]="student" (checkLoad)="load($event)"></app-add-component>

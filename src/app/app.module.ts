@@ -20,6 +20,8 @@ import { CommonModule } from '@angular/common';
 import { InfoUserComponent } from './views/task-component/nav/info-user/info-user.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { TaskStatusPipe } from './core/pipe/task-status.pipe';
+import { SharedModule } from './core/shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponentComponent,
     NavComponent,
     MainComponent,
-    InfoUserComponent
+    InfoUserComponent,
+    
+    
 
   ],
   imports: [
@@ -41,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     ModalModule.forRoot(),
     SocialLoginModule,
     AppRoutingModule,
+    SharedModule,
   ],
   providers: [
     {

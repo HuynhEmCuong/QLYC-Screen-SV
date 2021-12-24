@@ -20,9 +20,35 @@ main{
     }
 
     table{
-        
+        thead{
+            tr{
+                background-color:#144069 ;
+                color: white;
+            }
+            
+        }
         td.empty{
             background-color: #e3d9d9 !important;
+        }
+        span{
+            font-weight: 700;
+            color:  white;
+            border-radius: 5px;
+            padding: 5px;
+            
+        }
+        span.success{
+            border:1px solid green;
+            background-color:green ;
+        }
+        span.doing{
+            border:1px solid #0072B5;
+            background-color:#0072B5 ;
+        }
+        span.send{
+
+            border:1px solid #2dd8e4;
+            background-color:#2dd8e4 ;
         }
     }
 }
