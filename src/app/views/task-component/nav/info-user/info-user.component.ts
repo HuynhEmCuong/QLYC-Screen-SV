@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { map, tap } from 'rxjs';
 import { OperationResult } from 'src/app/core/models/general/operation-result';
-import { UserToken } from 'src/app/core/models/student/user';
+import { UserToken } from 'src/app/core/models/student/student';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { StudentService } from 'src/app/core/services/student.service';
 import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';

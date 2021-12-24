@@ -2,7 +2,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { take } from 'rxjs';
-import { UserToken } from '../models/student/user';
+import { UserToken } from '../models/student/student';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({ providedIn: 'root' })

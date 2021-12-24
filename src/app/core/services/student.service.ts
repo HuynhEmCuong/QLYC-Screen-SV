@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OperationResult } from '../models/general/operation-result';
-import { UserToken } from '../models/student/user';
+import { UserToken } from '../models/student/student';
 
 const API = environment.apiUrl;
 

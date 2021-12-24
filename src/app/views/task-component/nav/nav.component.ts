@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserToken } from 'src/app/core/models/student/user';
+import { UserToken } from 'src/app/core/models/student/student';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { StudentService } from 'src/app/core/services/student.service';
 import { InfoUserComponent } from './info-user/info-user.component';

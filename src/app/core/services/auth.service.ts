@@ -7,7 +7,7 @@ import { GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 import { firstValueFrom, lastValueFrom, map, ReplaySubject, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { OperationResult } from '../models/general/operation-result';
-import { StudentViewModel, UserToken } from '../models/student/user';
+import { StudentViewModel, UserToken } from '../models/student/student';
 
 
 
@@ -25,12 +25,11 @@ export class AuthService {
 
   signWithGoogle() {
     this._serviceAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(async res => {
-      debugger
       await this.setCurrentUser(res);
 
       setTimeout(() => {
         this._router.navigateByUrl("/");
-      }, 500);
+      }, 300);
     }, error => {
       if (error) alert('please allow popup for this app')
     })
@@ -55,9 +54,6 @@ export class AuthService {
     user.urlImage = data?.photoUrl
 
     this.setUserToken(user)
-    // this.currenUser.next(user)
-    // this._user = user;
-    // localStorage.setItem('user_info', JSON.stringify(user))
   }
 
   setUserToken(user: UserToken) {
