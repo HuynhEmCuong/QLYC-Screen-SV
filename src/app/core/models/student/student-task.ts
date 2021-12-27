@@ -13,9 +13,11 @@ interface Task {
     assignDate: string | null;
     student:UserToken |null;
     quantity:number;
+    id:number;
 }
 
 export class StudentTask implements Task {
+    id: number =0;
     quantity: number =1;
     requestType:RequestType|null = null;
     student: UserToken  |null=null;

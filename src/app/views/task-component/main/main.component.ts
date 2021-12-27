@@ -5,6 +5,7 @@ import { StudentTask } from 'src/app/core/models/student/student-task';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { RequestTypeService } from 'src/app/core/services/request-type.service';
 import { StudentTaskService } from 'src/app/core/services/student-task.service';
+import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +17,8 @@ export class MainComponent implements OnInit {
   stuentTasks: StudentTask[] = [];
 
   constructor(private _auth: AuthService,
-    private _studentTask: StudentTaskService
+    private _studentTask: StudentTaskService,
+    private _alert: SweetalertService
   ) {
     this._auth.currenUser.pipe().subscribe(res => {
       this.student = res;
@@ -33,11 +35,27 @@ export class MainComponent implements OnInit {
     })
   }
 
-  load(check:boolean){
-    if(check){
+  load(check: boolean) {
+    if (check) {
       this.getStudentTask();
     }
   }
 
+  removeItem(key: number) {
+    console.log(key)
+
+    this._alert.confirm("Cảnh Báo", "Bạn có muốn xoá dữ liệu", () => {
+      this._studentTask.deleteStudetTask(key).subscribe(res =>{
+        if(res.success){
+          this._alert.successMin("Xoá thành công ");
+          this.load(true)
+        }
+        else{
+          this._alert.error("Lỗi hệ thống")
+        }
+      })
+    })
+
+  }
 
 }

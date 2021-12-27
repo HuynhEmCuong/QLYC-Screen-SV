@@ -42,7 +42,8 @@
 
               </td>
               <td>
-                <button class="btn btn-danger" *ngIf="task.status==1">
+                <button class="btn btn-danger" *ngIf="task.status==1"
+                (click) ="removeItem(task.id)">
                   <fa-icon [icon]="['fas', 'trash-alt']">
                   </fa-icon>
                 </button></td>

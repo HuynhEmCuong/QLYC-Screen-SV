@@ -21,6 +21,12 @@ export class StudentTaskService {
   getAllTaskById(id: number) {
     return this._http.get<StudentTask[]>(`${API}/StudentTask/GetAllByStudentId?id=${id}`)
   }
+
+  deleteStudetTask(key:number){
+    return this._http.get<OperationResult>(`${API}/StudentTask/DeleteTask?id=${key}`)
+  }
+
+
 }
 
 
