@@ -16,7 +16,7 @@ interface Task {
 }
 
 export class StudentTask implements Task {
-    quantity: number =0;
+    quantity: number =1;
     requestType:RequestType|null = null;
     student: UserToken  |null=null;
     requestId: number = 0;

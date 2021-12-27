@@ -26,7 +26,6 @@ export class AuthService {
   signWithGoogle() {
     this._serviceAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(async res => {
       await this.setCurrentUser(res);
-
       setTimeout(() => {
         this._router.navigateByUrl("/");
       }, 300);

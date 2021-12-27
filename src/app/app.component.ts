@@ -25,7 +25,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
    setCurrenUser(){
-     debugger
     let auth =JSON.parse(localStorage.getItem('user_info') as string) 
     if(auth)
       this._auth.setUserToken(auth);

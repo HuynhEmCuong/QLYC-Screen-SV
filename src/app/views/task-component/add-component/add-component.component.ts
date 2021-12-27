@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
-import { interval, take } from 'rxjs';
+import { interval, skip, take } from 'rxjs';
 import { RequestType } from 'src/app/core/models/student/request-type';
 import { UserToken } from 'src/app/core/models/student/student';
 import { StudentTask } from 'src/app/core/models/student/student-task';
@@ -21,7 +21,7 @@ export class AddComponentComponent implements OnInit {
   requestTypes: RequestType[] = [];
   studentTask: StudentTask = new StudentTask()
   quantities: Quantity[] = []
-
+  requestTypeId = "";
 
   constructor(private _requestType: RequestTypeService,
 
@@ -33,11 +33,11 @@ export class AddComponentComponent implements OnInit {
 
   ngOnInit() {
     this.getRequestType();
-    this.getQuantity() ;
+    this.getQuantity();
   }
   getQuantity() {
-    interval(10).pipe(take(11)).subscribe(res => {
-      let quantity:Quantity  =new Quantity(res,res)
+    interval(10).pipe(skip(1), take(10)).subscribe(res => {
+      let quantity: Quantity = new Quantity(res, res)
       this.quantities.push(quantity);
     })
   }
@@ -48,12 +48,14 @@ export class AddComponentComponent implements OnInit {
     })
   }
 
-  async save() {
+  async save(addForm:any) {
     this.studentTask.studentId = this.student.id;
+    this.studentTask.requestId = +this.requestTypeId;
     const result = await this._studentTask.addTask(this.studentTask)
     if (result.success) {
       this._alert.successMin(result.message);
-      this.studentTask = new StudentTask()
+      this.studentTask = new StudentTask();
+      this.requestTypeId ="";
       this.hideModal();
       this.checkLoad.emit(true)
     } else {
@@ -69,7 +71,7 @@ export class AddComponentComponent implements OnInit {
 export class Quantity {
   id: number = 0;
   value: number = 0;
-  constructor(id:number , value:number){
+  constructor(id: number, value: number) {
     this.id = id;
     this.value = value;
   }

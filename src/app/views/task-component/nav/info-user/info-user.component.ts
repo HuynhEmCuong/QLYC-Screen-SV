@@ -18,7 +18,7 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
   @Input() userInfo: UserToken = new UserToken()
   @Output() user = new EventEmitter<UserToken>();
 
-
+  mobiPattern = '[- +()0-9]+';
   constructor(private _auth: AuthService,
     private _route: ActivatedRoute,
     private _studentService: StudentService,
@@ -29,6 +29,7 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     let studentId = this.userInfo.studentId;
     let studentIdNew = this.userInfo.studentIdNew;
+    let mobi = this.userInfo.mobi;
     if (studentId != studentIdNew) {
       this._alert.confirm("Cảnh báo", `Mã số sinh viên của bạn
       ${studentId} đã bị thay đổi thành ${studentIdNew}. Bạn có muốn thay đổi không ?`, () => {
@@ -36,6 +37,12 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
         this.update();
       })
     }
+    if(!mobi){
+      this._alert.confirm("Cảnh báo", `Bạn chưa cập nhật số điện thoại. Bạn có muốn cập nhật  không ?`, () => {
+        this.showModal()
+      })
+    }
+    
   }
 
   ngOnInit() {
@@ -49,7 +56,6 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
       })
     ).subscribe(res => {
       if (res.success) {
-        
         this.userInfo.studentId = res.data.studentId;
         this.userInfo.mobi = res.data.mobi;
         this._alert.successMin(res.message);
@@ -60,6 +66,7 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
       }
     })
   }
+
 
 
   showModal = () => this.modalInfo.show();

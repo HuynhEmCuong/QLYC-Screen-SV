@@ -23,7 +23,7 @@
               <th scope="col">Ghi chú</th>
               <th scope="col">Ngày yêu cầu</th>
               <th scope="col">Trạng thái</th>
-              <th scope="col"></th>
+              <th scope="col"></th> 
             </tr>
           </thead>
           <tbody>
@@ -31,7 +31,7 @@
               <td scope="row">{{i+1}}</td>
               <td>{{task.student?.fullName}}</td>
               <td>{{task.student?.studentId}}</td>
-              <td>{{task.requestType?.name}}</td>
+              <td>{{task.requestType?.description}}</td>
               <td>{{task.quantity}}</td>
               <td>{{task.note}}</td>
               <td>{{task.createDate |date: 'dd/MM/yyyy'}}</td>
