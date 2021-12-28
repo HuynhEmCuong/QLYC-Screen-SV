@@ -30,7 +30,7 @@ export class AuthService {
         this._router.navigateByUrl("/");
       }, 300);
     }, error => {
-      if (error) alert('please allow popup for this app')
+      if (error) alert('Lỗi hệ thống ')
     })
   }
 
