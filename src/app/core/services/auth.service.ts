@@ -36,8 +36,7 @@ export class AuthService {
 
   async setCurrentUser(value: any) {
     const data = JSON.parse(JSON.stringify(value))
-    let mssv = localStorage.getItem('mssv') || ""
-
+    let mssv = localStorage.getItem('mssv') || " ";
     let user = new UserToken();
 
     user.studentId = mssv;

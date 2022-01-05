@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl:"https://localhost:44381",
+  keyGG:"717433051568-elu5p0k9vq9h5plo7e2nrp00cfglq9ch.apps.googleusercontent.com"
 };
 
 /*
