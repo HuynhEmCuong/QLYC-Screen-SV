@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TaskStatusPipe } from './core/pipe/task-status.pipe';
 import { SharedModule } from './core/shared/shared.module';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,7 @@ import { SharedModule } from './core/shared/shared.module';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '717433051568-elu5p0k9vq9h5plo7e2nrp00cfglq9ch.apps.googleusercontent.com'
+              environment.keyGG
             )
           },
         ]
