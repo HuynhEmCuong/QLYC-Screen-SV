@@ -9,18 +9,22 @@ interface Task {
     status: RequestStatus;
     note: string;
     finishDate: string | null;
+    filePath: string | null;
+    fileName: string | null;
     createDate: string | null;
     assignDate: string | null;
-    student:UserToken |null;
-    quantity:number;
-    id:number;
+    student: UserToken | null;
+    quantity: number;
+    id: number;
 }
 
 export class StudentTask implements Task {
-    id: number =0;
-    quantity: number =1;
-    requestType:RequestType|null = null;
-    student: UserToken  |null=null;
+    filePath: string | null = null;
+    fileName: string | null = null;
+    id: number = 0;
+    quantity: number = 1;
+    requestType: RequestType | null = null;
+    student: UserToken | null = null;
     requestId: number = 0;
     studentId: number = 0;
     receiverId: number | null = null;

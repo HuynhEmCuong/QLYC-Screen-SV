@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { RequestTypeService } from 'src/app/core/services/request-type.service';
 import { StudentTaskService } from 'src/app/core/services/student-task.service';
 import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main',
@@ -15,7 +16,7 @@ import { SweetalertService } from 'src/app/core/services/system/sweetalert.servi
 export class MainComponent implements OnInit {
   student: UserToken = new UserToken();
   stuentTasks: StudentTask[] = [];
-
+  urlFile: string = environment.urlFile ;
   constructor(private _auth: AuthService,
     private _studentTask: StudentTaskService,
     private _alert: SweetalertService
@@ -45,12 +46,12 @@ export class MainComponent implements OnInit {
     console.log(key)
 
     this._alert.confirm("Cảnh Báo", "Bạn có muốn xoá dữ liệu", () => {
-      this._studentTask.deleteStudetTask(key).subscribe(res =>{
-        if(res.success){
+      this._studentTask.deleteStudetTask(key).subscribe(res => {
+        if (res.success) {
           this._alert.successMin("Xoá thành công ");
           this.load(true)
         }
-        else{
+        else {
           this._alert.error("Lỗi hệ thống")
         }
       })
