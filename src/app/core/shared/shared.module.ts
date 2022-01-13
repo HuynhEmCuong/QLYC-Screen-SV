@@ -1,14 +1,17 @@
 import { NgModule } from "@angular/core";
+import { CompactFilePipe } from "../pipe/compact-file.pipe";
 import { TaskStatusPipe } from "../pipe/task-status.pipe";
 
 @NgModule({
-    declarations:[
-        TaskStatusPipe
+    declarations: [
+        TaskStatusPipe,
+        CompactFilePipe
     ],
-    imports:[],
-    exports:[TaskStatusPipe]
+    imports: [],
+    exports: [TaskStatusPipe,
+        CompactFilePipe]
 
 })
 
 
-export class SharedModule{}
+export class SharedModule { }

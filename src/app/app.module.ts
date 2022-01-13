@@ -33,7 +33,6 @@ import { environment } from 'src/environments/environment';
     MainComponent,
     InfoUserComponent,
     
-    
 
   ],
   imports: [

@@ -37,7 +37,10 @@
               <td>{{task.note}}</td>
               <td>{{task.createDate |date: 'dd/MM/yyyy'}}</td>
               <td>
-                <span [ngClass]="task.status==1 ? 'send': task.status==2 ? 'doing':'success' ">
+                <!-- <span [ngClass]="task.status==1 ? 'send': task.status==2 ? 'doing':'success' ">
+                  {{task.status |taskstatus}}
+                </span> -->
+                <span [ngClass]="loadCss(task.status) ">
                   {{task.status |taskstatus}}
                 </span>
 
@@ -47,7 +50,7 @@
                   <fa-icon [icon]="['fas', 'trash-alt']">
                   </fa-icon>
                 </button>
-                <a target="blank" [href]="urlFile+ task.filePath" style="color: cornflowerblue;" *ngIf="task.status==3">{{task.fileName}}</a>
+                <a target="blank" [href]="urlFile+ task.filePath" style="color: cornflowerblue;" *ngIf="task.status==3">{{task.fileName | compactFile}}</a>
               </td>
             </tr>
             <tr *ngIf="stuentTasks.length ==0">
@@ -61,13 +64,6 @@
     </div>
   </div>
 </main>
-
-<ng-template #name>
-  <td>
-    <a [href]="urlFile+''"></a>
-  </td>
-</ng-template>
-
 
 <app-footer-component></app-footer-component>
 

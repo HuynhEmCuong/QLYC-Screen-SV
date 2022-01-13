@@ -59,4 +59,24 @@ export class MainComponent implements OnInit {
 
   }
 
+  loadCss(status: number){
+
+    let result = '';
+    switch (status) {
+      case 1:
+        result = 'send';
+        break;
+      case 2:
+        result = 'doing';
+        break;
+      case 3:
+        result = 'success';
+        break;
+      default:
+        result = 'disbaled';
+        break;
+    }
+    return result;
+  }
+
 }
