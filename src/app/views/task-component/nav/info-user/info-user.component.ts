@@ -2,9 +2,11 @@ import { AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnChan
 import { ActivatedRoute } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { map, tap } from 'rxjs';
+import { Department } from 'src/app/core/models/department/depart';
 import { OperationResult } from 'src/app/core/models/general/operation-result';
 import { UserToken } from 'src/app/core/models/student/student';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { DepartmentService } from 'src/app/core/services/department.service';
 import { StudentService } from 'src/app/core/services/student.service';
 import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';
 
@@ -17,14 +19,14 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
   @ViewChild('modalInfo', { static: false }) modalInfo!: ModalDirective;
   @Input() userInfo: UserToken = new UserToken()
   @Output() user = new EventEmitter<UserToken>();
+  departments: Department[] = [];
 
   mobiPattern = '[- +()0-9]+';
   constructor(private _auth: AuthService,
-    private _route: ActivatedRoute,
-    private _studentService: StudentService,
-    private _alert: SweetalertService) { }
-
-
+    private readonly _route: ActivatedRoute,
+    private readonly _studentService: StudentService,
+    private readonly _departService: DepartmentService,
+    private readonly _alert: SweetalertService) { }
 
   ngAfterViewInit(): void {
     let studentId = this.userInfo.studentId;
@@ -37,21 +39,27 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
         this.update();
       })
     }
-    if(!mobi){
+    if (!mobi) {
       this._alert.confirm("Cảnh báo", `Bạn chưa cập nhật số điện thoại. Bạn có muốn cập nhật  không ?`, () => {
         this.showModal()
       })
     }
-    
   }
 
   ngOnInit() {
+    this.getAllDepart();
+  }
 
+  getAllDepart() {
+    this._departService.getAll().subscribe(res => {
+      this.departments = res;
+    })
   }
 
   update() {
+    this.userInfo.departId = +this.userInfo.departId!;
     this._studentService.updateInfo(this.userInfo).pipe(
-      tap(res => { 
+      tap(res => {
         this._auth.currenUser.next(res.data);
       })
     ).subscribe(res => {
@@ -66,8 +74,6 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
       }
     })
   }
-
-
 
   showModal = () => this.modalInfo.show();
   hideModal = () => this.modalInfo.hide();
