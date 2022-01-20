@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faChevronCircleRight, faEnvelope, faPlusSquare, faTrashAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   GoogleLoginProvider,
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TaskStatusPipe } from './core/pipe/task-status.pipe';
 import { SharedModule } from './core/shared/shared.module';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,8 @@ import { environment } from 'src/environments/environment';
     SocialLoginModule,
     AppRoutingModule,
     SharedModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

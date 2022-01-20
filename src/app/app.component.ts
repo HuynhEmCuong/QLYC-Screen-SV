@@ -4,7 +4,8 @@ import { AddComponentComponent } from './views/task-component/add-component/add-
 
 @Component({
   selector: 'app-root',
-  template:`<router-outlet> </router-outlet>`,
+  template:`<router-outlet> </router-outlet>
+  <ngx-spinner bdColor = "rgba(23,65,104,0.29)" size = "medium" color = "#174168" type = "line-spin-fade-rotating" [fullScreen] = "true"><p style="color: #d5caba;font-size: 18px;" > Loading... </p></ngx-spinner>`,
 })
 export class AppComponent implements OnInit, AfterViewInit {
   check:boolean =false;
