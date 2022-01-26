@@ -54,7 +54,7 @@
                   <span class="input-group-text" id="basic-addon1">Khoa</span>
                 </div>
                 <select class="form-control" name="Depart" required
-                  [(ngModel)]="userInfo.departId ==null ?'':userInfo.departId " #depart="ngModel">
+                  [(ngModel)]="departId " #depart="ngModel">
                   <option value="">--Chọn--</option>
                   <option *ngFor="let item of departments" [value]="item.id">{{item.name}}</option>
                 </select>

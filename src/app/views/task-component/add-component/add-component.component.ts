@@ -19,6 +19,7 @@ export class AddComponentComponent implements OnInit {
   @ViewChild('lgModal', { static: false }) modalAdd!: ModalDirective;
   @Output() checkLoad = new EventEmitter();
   @Input() student: UserToken = new UserToken()
+
   requestTypes: RequestType[] = [];
   studentTask: StudentTask = new StudentTask()
   quantities: Quantity[] = []
@@ -28,7 +29,7 @@ export class AddComponentComponent implements OnInit {
 
     private _studentTask: StudentTaskService,
     private _alert: SweetalertService,
-    private readonly _spiner:NgxSpinnerService
+    private readonly _spiner: NgxSpinnerService
   ) {
 
   }
@@ -45,12 +46,15 @@ export class AddComponentComponent implements OnInit {
   }
 
   getRequestType() {
+
     this._requestType.getAll().subscribe(res => {
       this.requestTypes = res;
     })
   }
 
-  async save(addForm:any) {
+
+  //  tao ham cong 2 so
+  async save(addForm: any) {
     this._spiner.show();
     this.studentTask.studentId = this.student.id;
     this.studentTask.requestId = +this.requestTypeId;
@@ -59,7 +63,7 @@ export class AddComponentComponent implements OnInit {
       this._spiner.hide();
       this._alert.successMin(result.message);
       this.studentTask = new StudentTask();
-      this.requestTypeId ="";
+      this.requestTypeId = "";
       this.hideModal();
       this.checkLoad.emit(true)
     } else {

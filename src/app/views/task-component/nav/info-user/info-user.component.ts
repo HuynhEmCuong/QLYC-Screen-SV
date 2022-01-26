@@ -20,6 +20,7 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
   @Input() userInfo: UserToken = new UserToken()
   @Output() user = new EventEmitter<UserToken>();
   departments: Department[] = [];
+  departId :string ="";
 
   mobiPattern = '[- +()0-9]+';
   constructor(private _auth: AuthService,
@@ -57,7 +58,7 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
   }
 
   update() {
-    this.userInfo.departId = +this.userInfo.departId!;
+    this.userInfo.departId = +this.departId;
     this._studentService.updateInfo(this.userInfo).pipe(
       tap(res => {
         this._auth.currenUser.next(res.data);

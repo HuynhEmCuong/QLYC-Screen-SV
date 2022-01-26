@@ -1,7 +1,7 @@
 
 
 export class UserToken implements StudentViewModel {
-    departId: number | null = 0;
+    departId: number | null = null;
     createDate: string | null = "";
     modifyDate: string | null = "";
     id: number = 0;
@@ -13,6 +13,7 @@ export class UserToken implements StudentViewModel {
     studentId: string = '';
     studentIdNew: string = '';
     mobi: string = "";
+
 }
 
 
