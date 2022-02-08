@@ -1,0 +1,25 @@
+version: '3'
+
+#VOLUMES
+# volumes:
+#   my-dir:
+#     dirver
+
+#NETWORK
+networks:
+  web-net:
+    external: true
+
+#SERVICES
+services:
+  qlyc-screen:
+    hostname: qlyc-screen
+    container_name: qlyc-screen
+    image: huynhcuongem75/qlyc-screen:v1.3
+    build: .
+    restart: always
+    networks:
+      - web-net
+    ports:
+      - 5200:80
+      
