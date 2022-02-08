@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { interval, skip, take } from 'rxjs';
 import { RequestType } from 'src/app/core/models/student/request-type';
 import { UserToken } from 'src/app/core/models/student/student';
@@ -18,6 +19,7 @@ export class AddComponentComponent implements OnInit {
   @ViewChild('lgModal', { static: false }) modalAdd!: ModalDirective;
   @Output() checkLoad = new EventEmitter();
   @Input() student: UserToken = new UserToken()
+
   requestTypes: RequestType[] = [];
   studentTask: StudentTask = new StudentTask()
   quantities: Quantity[] = []
@@ -26,7 +28,8 @@ export class AddComponentComponent implements OnInit {
   constructor(private _requestType: RequestTypeService,
 
     private _studentTask: StudentTaskService,
-    private _alert: SweetalertService
+    private _alert: SweetalertService,
+    private readonly _spiner: NgxSpinnerService
   ) {
 
   }
@@ -43,19 +46,24 @@ export class AddComponentComponent implements OnInit {
   }
 
   getRequestType() {
+
     this._requestType.getAll().subscribe(res => {
       this.requestTypes = res;
     })
   }
 
-  async save(addForm:any) {
+
+  //  tao ham cong 2 so
+  async save(addForm: any) {
+    this._spiner.show();
     this.studentTask.studentId = this.student.id;
     this.studentTask.requestId = +this.requestTypeId;
     const result = await this._studentTask.addTask(this.studentTask)
     if (result.success) {
+      this._spiner.hide();
       this._alert.successMin(result.message);
       this.studentTask = new StudentTask();
-      this.requestTypeId ="";
+      this.requestTypeId = "";
       this.hideModal();
       this.checkLoad.emit(true)
     } else {

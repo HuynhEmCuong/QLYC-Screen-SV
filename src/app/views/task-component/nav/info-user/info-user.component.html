@@ -51,6 +51,27 @@
             <div class="col-md-6">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Khoa</span>
+                </div>
+                <select class="form-control" name="Depart" required
+                  [(ngModel)]="departId " #depart="ngModel">
+                  <option value="">--Chọn--</option>
+                  <option *ngFor="let item of departments" [value]="item.id">{{item.name}}</option>
+                </select>
+             
+              </div>
+              <div *ngIf="depart.invalid && (infoForm.submitted || depart.touched) ">
+                <div *ngIf="depart.errors?.['required']" class="error">
+                  Khoa bắt buộc chọn
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row ">
+            <div class="col-md-6">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">Số điện thoại</span>
                 </div>
                 <input type="text" [(ngModel)]="userInfo.mobi" #mobi="ngModel" required maxlength="10"
@@ -67,6 +88,7 @@
                 </div>
               </div>
             </div>
+
           </div>
           <div class="modal-footer">
             <button class="btn btn-success" type="submit">Lưu</button>
