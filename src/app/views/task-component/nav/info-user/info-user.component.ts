@@ -30,6 +30,9 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
     private readonly _alert: SweetalertService) { }
 
   ngAfterViewInit(): void {
+    console.log(this.userInfo)
+
+    this.departId = (this.userInfo.departId)?.toString() ?? "" ;
     let studentId = this.userInfo.studentId;
     let studentIdNew = this.userInfo.studentIdNew;
     let mobi = this.userInfo.mobi;

@@ -36,17 +36,18 @@ export class AuthService {
 
   async setCurrentUser(value: any) {
     const data = JSON.parse(JSON.stringify(value))
-    let mssv = localStorage.getItem('mssv') || " ";
+    let dataLocalStore = JSON.parse(localStorage.getItem('data') || " ");
     let user = new UserToken();
 
-    user.studentId = mssv;
+    user.studentId = dataLocalStore.mssv ?? "";
     user.email = data?.email;
+    user.departId = dataLocalStore.dept ?? 0;
     user.fullName = data?.name;
 
     //Check user exsit and get info studentId vs Mobi
     const result = await this.checkStudentExsit(user);
     user = result.data;
-    user.studentIdNew = mssv;
+    user.studentIdNew = dataLocalStore.mssv ;
     user.userName = data?.userName;
     user.idToken = data?.idToken
     user.urlImage = data?.photoUrl

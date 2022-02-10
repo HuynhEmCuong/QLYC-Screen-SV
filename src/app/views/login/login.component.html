@@ -13,9 +13,24 @@
                                 Mã số sinh viên bắt buộc nhập
                             </div>
                             <div *ngIf="input.errors?.['maxlength'] || input.errors?.['minlength']" class="error">
-                               Mã số sinh viên gồm 10 kí tự
+                                Mã số sinh viên gồm 10 kí tự
                             </div>
                         </div>
+                    </div>
+                    <div class="login__field">
+                        <fa-icon class="button__icon" [icon]="['fas', 'building']"></fa-icon>
+                        <select class="login__input" name="Depart" required
+                        [(ngModel)]="dept " #depart="ngModel" >
+                            <option value="">--Khoa--</option>
+                            <option *ngFor="let item of departments" [value]="item.id">{{item.name}}</option>
+                        </select>
+
+                        <div *ngIf="depart.invalid && (signInForm.submitted || depart.touched) ">
+                            <div *ngIf="depart.errors?.['required']" class="error">
+                              Khoa bắt buộc chọn
+                            </div>
+                          </div>
+
                     </div>
                     <button class="button login__submit" type="submit">
                         <span class="button__text">Đăng nhập</span>

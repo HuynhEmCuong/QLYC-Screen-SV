@@ -83,7 +83,7 @@
 .login {
 	width: 320px;
 	padding: 30px;
-	padding-top: 156px;
+	padding-top: 80px;
 }
 
 .login__field {
@@ -165,5 +165,10 @@
 
 .social-login__icon:hover {
 	transform: scale(1.5);	
+}
+
+select.login__input {
+	width: auto;
+	font-size: 13px;
 }
 
