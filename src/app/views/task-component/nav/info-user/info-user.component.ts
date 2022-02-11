@@ -27,11 +27,11 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
     private readonly _route: ActivatedRoute,
     private readonly _studentService: StudentService,
     private readonly _departService: DepartmentService,
-    private readonly _alert: SweetalertService) { }
+    private readonly _alert: SweetalertService) {
+      
+     }
 
   ngAfterViewInit(): void {
-    console.log(this.userInfo)
-
     this.departId = (this.userInfo.departId)?.toString() ?? "" ;
     let studentId = this.userInfo.studentId;
     let studentIdNew = this.userInfo.studentIdNew;
@@ -52,6 +52,7 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getAllDepart();
+    this.departId = (this.userInfo.departId)?.toString() ?? "" ;
   }
 
   getAllDepart() {

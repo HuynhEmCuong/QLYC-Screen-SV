@@ -74,7 +74,8 @@ export class AuthService {
     localStorage.removeItem('user_info')
     localStorage.removeItem('mssv')
     this._serviceAuth.signOut();
-    this._router.navigateByUrl("/login")
+    window.location.reload()
+    
   }
 
 

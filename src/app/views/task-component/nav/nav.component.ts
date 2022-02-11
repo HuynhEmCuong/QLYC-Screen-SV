@@ -13,12 +13,15 @@ export class NavComponent implements OnInit {
   userToken: UserToken = new UserToken()
   constructor(
     private _auth: AuthService,
-    private _studenService: StudentService) { }
+    private _studenService: StudentService) { 
+
+      this._auth.currenUser.pipe().subscribe(res => {
+        this.userToken = res;
+      })
+    }
 
   ngOnInit() {
-    this._auth.currenUser.pipe().subscribe(res => {
-      this.userToken = res;
-    })
+  
   }
   update($value: any) {
     this.userToken = $value
