@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 export class MainComponent implements OnInit {
   student: UserToken = new UserToken();
   stuentTasks: StudentTask[] = [];
-  urlFile: string = environment.urlFile ;
+  urlFile: string = environment.urlFile;
   constructor(private _auth: AuthService,
     private _studentTask: StudentTaskService,
     private _alert: SweetalertService
@@ -49,17 +49,19 @@ export class MainComponent implements OnInit {
       this._studentTask.deleteStudetTask(key).subscribe(res => {
         if (res.success) {
           this._alert.successMin("Xoá thành công ");
-          this.load(true)
         }
         else {
-          this._alert.error("Lỗi hệ thống")
+          this._alert.warning(res.message);
         }
+        this.load(true)
+      }, error => {
+        this._alert.error("Lỗi hệ thống")
       })
     })
 
   }
 
-  loadCss(status: number){
+  loadCss(status: number) {
 
     let result = '';
     switch (status) {
