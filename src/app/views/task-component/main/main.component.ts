@@ -1,9 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { RequestType } from 'src/app/core/models/student/request-type';
 import { UserToken } from 'src/app/core/models/student/student';
 import { StudentTask } from 'src/app/core/models/student/student-task';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { RequestTypeService } from 'src/app/core/services/request-type.service';
 import { StudentTaskService } from 'src/app/core/services/student-task.service';
 import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';
 import { environment } from 'src/environments/environment';
@@ -43,8 +41,6 @@ export class MainComponent implements OnInit {
   }
 
   removeItem(key: number) {
-    console.log(key)
-
     this._alert.confirm("Cảnh Báo", "Bạn có muốn xoá dữ liệu", () => {
       this._studentTask.deleteStudetTask(key).subscribe(res => {
         if (res.success) {
