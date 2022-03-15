@@ -8,16 +8,16 @@ import { Pipe, PipeTransform } from '@angular/core';
  *   {{ 2 | exponentialStrength:10 }}
  *   formats to: 1024
 */
-@Pipe({ name: 'compactFile'})
-export class CompactFilePipe implements PipeTransform  {
-  transform(value :any ) {
+@Pipe({ name: 'compactFile' })
+export class CompactFilePipe implements PipeTransform {
+  transform(value: any) {
     var re = /(?:\.([^.]+))?$/;
-    var ext = re.exec(value)![1] ;
-    let fileName = value.replace(ext,"");
-    if(fileName.length>10){
-      fileName= fileName.slice(0,10) +"..."+ext;
+    var ext = re.exec(value)![1];
+    let fileName = value.replace(ext, "");
+    if (fileName.length > 10) {
+      fileName = fileName.slice(0, 10) + "..." + ext;
     }
-    else{
+    else {
       fileName = value;
     }
     return fileName;
