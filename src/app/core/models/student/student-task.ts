@@ -8,6 +8,8 @@ interface Task {
     receiverId: number | null;
     status: RequestStatus;
     note: string;
+    filePathStudent: string | null;
+    fileNameStudent: string | null;
     finishDate: string | null;
     filePath: string | null;
     fileName: string | null;
@@ -19,6 +21,8 @@ interface Task {
 }
 
 export class StudentTask implements Task {
+    filePathStudent: string | null ="";
+    fileNameStudent: string | null ="";
     filePath: string | null = null;
     fileName: string | null = null;
     id: number = 0;

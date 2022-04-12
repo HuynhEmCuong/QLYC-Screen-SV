@@ -25,8 +25,6 @@ export class StudentTaskService {
   deleteStudetTask(key:number){
     return this._http.get<OperationResult>(`${API}/StudentTask/DeleteTask?id=${key}`)
   }
-
-
 }
 
 

@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form name="form" novalidate #addForm="ngForm" (submit)="addForm.form.valid && save(addForm)">
+        <form name="form" novalidate #addForm="ngForm" >
           <div class="form-group row ">
             <div class="col-md-8 col-12">
               <div class="input-group mb-3">
@@ -16,17 +16,18 @@
                   <span class="input-group-text" id="basic-addon1">Loại yêu cầu</span>
                 </div>
                 <select class="form-control" [(ngModel)]="requestTypeId" name="request" required
-                  #selectRequest="ngModel">
+                  #selectRequest="ngModel" (ngModelChange)="getNoteRequestType($event)">
                   <option value="">--Chọn--</option>
                   <option *ngFor="let item of requestTypes" [value]="item.id">{{item.name}}</option>
                 </select>
-                
+
               </div>
               <div *ngIf="selectRequest.invalid && (addForm.submitted || selectRequest.touched) ">
                 <div *ngIf="selectRequest.errors?.['required']" class="error">
                   Loại yêu cầu bắt buộc chọn
                 </div>
               </div>
+
             </div>
             <div class="col-md-4 col-12">
               <div class="input-group mb-3">
@@ -38,7 +39,20 @@
                 </select>
               </div>
             </div>
-
+          </div>
+          <div class="form-group">
+            <div class="col-12">
+              <div class="note">
+                <p>{{requestTypeNote}}</p>
+              </div>
+            </div>
+            <div class="col-12" *ngIf="requestTypeNote">
+              <div class="file" *ngIf="studentTask.fileNameStudent =='' ;else infoFile ">
+                <label class="btn btn-upload"><i class="fa fa-upload"></i> Tải lên
+                  <input type="file" accept=".pdf" style="display: none" (change)="onSelectFile($event)" />
+                </label>
+              </div>
+            </div>
           </div>
           <div class="form-group row ">
 
@@ -53,7 +67,7 @@
 
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success" type="submit">Lưu</button>
+            <button class="btn btn-success" (click)="save(addForm)">Lưu</button>
           </div>
         </form>
 
@@ -62,3 +76,15 @@
     </div>
   </div>
 </div>
+
+
+<ng-template #infoFile>
+  <div class="file">
+    <span>{{studentTask.fileNameStudent}}
+
+      <button class="btn btn-danger" style="margin-left:20px;" (click)="removeFile()">
+        <i class="fa fa-trash"></i> Xóa
+      </button>
+    </span>
+  </div>
+</ng-template>

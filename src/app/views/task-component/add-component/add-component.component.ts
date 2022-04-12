@@ -2,12 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild 
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { interval, skip, take } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { RequestType } from 'src/app/core/models/student/request-type';
 import { UserToken } from 'src/app/core/models/student/student';
 import { StudentTask } from 'src/app/core/models/student/student-task';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { RequestTypeService } from 'src/app/core/services/request-type.service';
 import { StudentTaskService } from 'src/app/core/services/student-task.service';
+import { FileService } from 'src/app/core/services/system/file.service';
 import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';
 
 @Component({
@@ -23,21 +25,24 @@ export class AddComponentComponent implements OnInit {
   requestTypes: RequestType[] = [];
   studentTask: StudentTask = new StudentTask()
   quantities: Quantity[] = []
-  requestTypeId = "";
+  requestTypeId: string = "";
+  requestTypeNote: string = "";
 
   constructor(private _requestType: RequestTypeService,
-
-    private _studentTask: StudentTaskService,
-    private _alert: SweetalertService,
+    private readonly _file: FileService,
+    private readonly _studentTask: StudentTaskService,
+    private readonly _alert: SweetalertService,
     private readonly _spiner: NgxSpinnerService
   ) {
 
   }
 
   ngOnInit() {
-    this.getRequestType();
+    this.getRequestTypes();
     this.getQuantity();
   }
+
+  //Init Quantity
   getQuantity() {
     interval(10).pipe(skip(1), take(10)).subscribe(res => {
       let quantity: Quantity = new Quantity(res, res)
@@ -45,15 +50,20 @@ export class AddComponentComponent implements OnInit {
     })
   }
 
-  getRequestType() {
-
+  //Get lits RequestType from DB
+  getRequestTypes() {
     this._requestType.getAll().subscribe(res => {
       this.requestTypes = res;
     })
   }
 
+  //Get Note for RequestType
+  getNoteRequestType(requestId: string | number): void {
+    this.requestTypeNote = this.requestTypes.find(x => x.id == requestId)?.note ?? "";
+  }
 
-  //  tao ham cong 2 so
+
+  //Submit
   async save(addForm: any) {
     this._spiner.show();
     this.studentTask.studentId = this.student.id;
@@ -62,13 +72,60 @@ export class AddComponentComponent implements OnInit {
     if (result.success) {
       this._spiner.hide();
       this._alert.successMin(result.message);
-      this.studentTask = new StudentTask();
-      this.requestTypeId = "";
+      this.clearForm();
       this.hideModal();
       this.checkLoad.emit(true)
     } else {
       this._alert.error("Lỗi hệ thống")
     }
+  }
+
+  //SelectFile
+  onSelectFile(event: any) {
+    debugger
+    if (event.target.files && event.target.files[0]) {
+      this._spiner.show();
+      const file = event.target.files[0];
+      if (file.size > 10485760) {
+        this._alert.warning('Please select a file maximum size 10M!');
+        return;
+      }
+      const formData = new FormData();
+      let nameFile = this.student.fullName + "-" + this.requestTypeId;
+      formData.append('file', file);
+      this._file.uploadFile(formData, nameFile).
+        pipe(
+          tap(() => { this._spiner.hide(); })
+        ).subscribe(res => {
+          if (res) {
+
+            this.studentTask.fileNameStudent = res.fileResponse.fileLocalName;
+            this.studentTask.filePathStudent = res.fileResponse.fileFullPath;
+          } else {
+            this._alert.warning("Lỗi hệ thống")
+          }
+        })
+    }
+  }
+
+  removeFile() {
+    this._alert.confirm("Xoá", "Bạn có muốn xoá file", () => {
+      this._file.removeFile(this.studentTask.filePathStudent ?? "").subscribe(res => {
+        if (res) {
+          this._alert.successMin("Xoá file thành công");
+          this.studentTask.fileNameStudent = "";
+          this.studentTask.filePathStudent = "";
+        } else {
+          this._alert.warning("Lỗi hệ thống")
+        }
+      })
+    });
+  }
+
+  private clearForm() {
+    this.studentTask = new StudentTask();
+    this.requestTypeId = "";
+    this.requestTypeNote = ""
   }
 
 
