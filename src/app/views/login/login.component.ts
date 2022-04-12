@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Department } from 'src/app/core/models/department/depart';
 import { UserToken } from 'src/app/core/models/student/student';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DepartmentService } from 'src/app/core/services/department.service';
+import { SweetalertService } from 'src/app/core/services/system/sweetalert.service';
 
 @Component({
   selector: 'app-login',
@@ -10,24 +12,38 @@ import { DepartmentService } from 'src/app/core/services/department.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  mssv:string ='';
-  dept:string ='';
+  mssv: string = '';
+  dept: string = '';
   departments: Department[] = [];
-  constructor(private _auth:AuthService,
-    private readonly _departService: DepartmentService,) { }
+  constructor(private _auth: AuthService,
+    private readonly _departService: DepartmentService,
+    private readonly _router: Router,
+    private readonly _sweetAlert: SweetalertService) { }
 
   ngOnInit() {
     this.getAllDepart();
   }
 
-  login (){
+  login() {
     const data = {
-      mssv:this.mssv,
-      dept : +this.dept
+      mssv: this.mssv,
+      dept: +this.dept
     }
-    localStorage.setItem('data',JSON.stringify(data));
-    this._auth.signWithGoogle()
-  } 
+    localStorage.setItem('data', JSON.stringify(data));
+    this._auth.signWithGoogle().then(res => {
+      if (res) {
+        setTimeout(() => {
+          this._router.navigateByUrl("/");
+        }, 300);
+      } else {
+        this._sweetAlert.error("Mã số sinh viên không tìm thấy", "Trang tự reload sau 2 giây");
+        setTimeout(() => {
+          this._auth.sigOut();
+        }, 3000);
+        return;
+      }
+    })
+  }
 
   getAllDepart() {
     this._departService.getAll().subscribe(res => {

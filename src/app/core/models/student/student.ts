@@ -29,3 +29,13 @@ export interface StudentViewModel {
     createDate: string | null;
     modifyDate: string | null;
 }
+
+export class LoginStudentDto {
+    email: string = "";
+    studentId: string = "";
+
+    constructor(email: string, studentId: string) {
+        this.email = email;
+        this.studentId = studentId;
+    }
+}
