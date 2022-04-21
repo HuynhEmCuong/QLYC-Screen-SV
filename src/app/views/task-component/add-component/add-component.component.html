@@ -48,7 +48,8 @@
             </div>
             <div class="col-12" *ngIf="requestTypeNote">
               <div class="file" *ngIf="studentTask.fileNameStudent =='' ;else infoFile ">
-                <label class="btn btn-upload"><i class="fa fa-upload"></i> Tải lên
+                SV tải biên lai đóng tiền:
+                <label class="btn btn-upload"><span style="color: blue;"> <i class="fa fa-upload"></i> Tại đây</span> 
                   <input type="file" accept=".pdf" style="display: none" (change)="onSelectFile($event)" />
                 </label>
               </div>

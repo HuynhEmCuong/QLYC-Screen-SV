@@ -65,9 +65,15 @@ export class AddComponentComponent implements OnInit {
 
   //Submit
   async save(addForm: any) {
-    this._spiner.show();
+    debugger
+
     this.studentTask.studentId = this.student.id;
     this.studentTask.requestId = +this.requestTypeId;
+    if (this.studentTask.requestId == 13 && !this.studentTask.fileNameStudent) {
+      this._alert.warning("File không được để trống");
+      return;
+    }
+    this._spiner.show();
     const result = await this._studentTask.addTask(this.studentTask)
     if (result.success) {
       this._spiner.hide();
@@ -82,14 +88,18 @@ export class AddComponentComponent implements OnInit {
 
   //SelectFile
   onSelectFile(event: any) {
-    debugger
     if (event.target.files && event.target.files[0]) {
-      this._spiner.show();
       const file = event.target.files[0];
       if (file.size > 10485760) {
         this._alert.warning('Please select a file maximum size 10M!');
         return;
       }
+      const fileNameExtension = file.name.split('.').pop();
+      if (fileNameExtension.toLowerCase() !== 'pdf') {
+        this._alert.warning('Please select a file .pdf ');
+        return;
+      }
+      this._spiner.show();
       const formData = new FormData();
       let nameFile = this.student.fullName + "-" + this.requestTypeId;
       formData.append('file', file);

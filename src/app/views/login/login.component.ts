@@ -13,7 +13,6 @@ import { SweetalertService } from 'src/app/core/services/system/sweetalert.servi
 })
 export class LoginComponent implements OnInit {
   mssv: string = '';
-  dept: string = '';
   departments: Department[] = [];
   constructor(private _auth: AuthService,
     private readonly _departService: DepartmentService,
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
   login() {
     const data = {
       mssv: this.mssv,
-      dept: +this.dept
     }
     localStorage.setItem('data', JSON.stringify(data));
     this._auth.signWithGoogle().then(res => {

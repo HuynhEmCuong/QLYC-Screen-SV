@@ -45,12 +45,13 @@
                 </span>
 
               </td>
-              <td  >
+              <td>
                 <button class="btn btn-danger" (click)="removeItem(task.id)" *ngIf="task.status==1">
                   <fa-icon [icon]="['fas', 'trash-alt']">
                   </fa-icon>
                 </button>
-                <a target="blank" [href]="urlFile+ task.filePath" style="color: cornflowerblue;" *ngIf="task.status==3">{{task.fileName | compactFile}}</a>
+                <a target="blank" [href]="urlFile+ task.filePath" style="color: cornflowerblue;"
+                  *ngIf="task.status==3">{{task.fileName ?? "" | compactFile }}</a>
               </td>
             </tr>
             <tr *ngIf="stuentTasks.length ==0">
@@ -68,4 +69,3 @@
 <app-footer-component></app-footer-component>
 
 <app-add-component #add [student]="student" (checkLoad)="load($event)"></app-add-component>
-
