@@ -1,4 +1,5 @@
 import { AfterContentInit, Component, OnInit, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { UserToken } from 'src/app/core/models/student/student';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { StudentService } from 'src/app/core/services/student.service';
@@ -14,7 +15,8 @@ export class NavComponent implements OnInit {
   userToken: UserToken = new UserToken()
   constructor(
     private _auth: AuthService,
-    private _studenService: StudentService) {
+    private _studenService: StudentService,
+    private _translate: TranslateService) {
     this._auth.currenUser.pipe().subscribe(res => {
       this.userToken = res;
       this.isLogin = this.userToken ? true : false;
@@ -22,12 +24,18 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
+    const lang = localStorage.getItem('lang');
+    if (lang) {
+      this._translate.use(lang);
+    }
   }
   update($value: any) {
     this.userToken = $value
   }
 
   switchLang(lang: string): void {
-    
+    debugger
+    localStorage.setItem('lang', lang);
+    this._translate.use(lang);
   }
 }

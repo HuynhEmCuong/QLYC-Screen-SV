@@ -20,11 +20,13 @@ import { MainComponent } from './views/task-component/main/main.component';
 import { CommonModule } from '@angular/common';
 import { InfoUserComponent } from './views/task-component/nav/info-user/info-user.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TaskStatusPipe } from './core/pipe/task-status.pipe';
 import { SharedModule } from './core/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NavComponent,
     MainComponent,
     InfoUserComponent,
-    
+
 
   ],
   imports: [
@@ -49,12 +51,22 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AppRoutingModule,
     SharedModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot(
+      {
+        loader: {
+          provide: TranslateLoader,
+          useFactory: httpTranslateLoader,
+          deps: [HttpClient]
+        },
+        defaultLanguage: 'vi',
+      }
+    )
   ],
   providers: [
     {
       provide: 'SocialAuthServiceConfig',
-      useValue:{
+      useValue: {
         autoLogin: false,
         providers: [
           {
@@ -71,8 +83,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 })
 export class AppModule {
   constructor(private library: FaIconLibrary) {
-    library.addIcons(faEnvelope, faTrashAlt, faPlusSquare,faUserCircle,faChevronCircleRight,
+    library.addIcons(faEnvelope, faTrashAlt, faPlusSquare, faUserCircle, faChevronCircleRight,
       faBuilding);
   }
 
+}
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }

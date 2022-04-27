@@ -1,0 +1,10 @@
+{
+  "alert": {},
+  "login-screen": {
+    "login": "Login"
+  },
+  "common":{
+    "language":"Language"
+  }
+  
+}

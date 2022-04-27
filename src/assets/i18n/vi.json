@@ -1,0 +1,12 @@
+{
+  "alert": {
+   
+  },
+  "login-screen":{
+    "login":"Đăng nhập"
+  },
+  "common":{
+    "language":"Ngôn ngữ"
+  }
+  
+}
