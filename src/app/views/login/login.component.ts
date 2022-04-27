@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       if (res) {
         setTimeout(() => {
           this._router.navigateByUrl("/");
-        }, 300);
+        }, 200);
       } else {
         this._sweetAlert.error("Mã số sinh viên không tìm thấy", "Trang tự reload sau 2 giây");
         setTimeout(() => {

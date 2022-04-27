@@ -32,22 +32,22 @@ export class InfoUserComponent implements OnInit, AfterViewInit {
      }
 
   ngAfterViewInit(): void {
-    this.departId = (this.userInfo.departId)?.toString() ?? "" ;
-    let studentId = this.userInfo.studentId;
-    let studentIdNew = this.userInfo.studentIdNew;
-    let mobi = this.userInfo.mobi;
-    if (studentId != studentIdNew) {
-      this._alert.confirm("Cảnh báo", `Mã số sinh viên của bạn
-      ${studentId} đã bị thay đổi thành ${studentIdNew}. Bạn có muốn thay đổi không ?`, () => {
-        this.userInfo.studentId = studentIdNew;
-        this.update();
-      })
-    }
-    if (!mobi) {
-      this._alert.confirm("Cảnh báo", `Bạn chưa cập nhật số điện thoại. Bạn có muốn cập nhật  không ?`, () => {
-        this.showModal()
-      })
-    }
+    // this.departId = (this.userInfo.departId)?.toString() ?? "" ;
+    // let studentId = this.userInfo.studentId;
+    // let studentIdNew = this.userInfo.studentIdNew;
+    // let mobi = this.userInfo.mobi;
+    // // if (studentId != studentIdNew) {
+    // //   this._alert.confirm("Cảnh báo", `Mã số sinh viên của bạn
+    // //   ${studentId} đã bị thay đổi thành ${studentIdNew}. Bạn có muốn thay đổi không ?`, () => {
+    // //     this.userInfo.studentId = studentIdNew;
+    // //     this.update();
+    // //   })
+    // // }
+    // // if (!mobi) {
+    // //   this._alert.confirm("Cảnh báo", `Bạn chưa cập nhật số điện thoại. Bạn có muốn cập nhật  không ?`, () => {
+    // //     this.showModal()
+    // //   })
+    // // }
   }
 
   ngOnInit() {
