@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { interval, skip, take } from 'rxjs';
@@ -32,7 +33,8 @@ export class AddComponentComponent implements OnInit {
     private readonly _file: FileService,
     private readonly _studentTask: StudentTaskService,
     private readonly _alert: SweetalertService,
-    private readonly _spiner: NgxSpinnerService
+    private readonly _spiner: NgxSpinnerService,
+    private readonly _translate:TranslateService
   ) {
 
   }
@@ -82,7 +84,7 @@ export class AddComponentComponent implements OnInit {
       this.hideModal();
       this.checkLoad.emit(true)
     } else {
-      this._alert.error("Lỗi hệ thống")
+      this._alert.error(this._translate.instant('alert.system_error'))
     }
   }
 
@@ -91,12 +93,12 @@ export class AddComponentComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       if (file.size > 10485760) {
-        this._alert.warning('Please select a file maximum size 10M!');
+        this._alert.warning(this._translate.instant('alert.file_upload'));
         return;
       }
       const fileNameExtension = file.name.split('.').pop();
       if (fileNameExtension.toLowerCase() !== 'pdf') {
-        this._alert.warning('Please select a file .pdf ');
+        this._alert.warning(this._translate.instant('alert.file_pdf'));
         return;
       }
       this._spiner.show();
@@ -112,21 +114,21 @@ export class AddComponentComponent implements OnInit {
             this.studentTask.fileNameStudent = res.fileResponse.fileLocalName;
             this.studentTask.filePathStudent = res.fileResponse.fileFullPath;
           } else {
-            this._alert.warning("Lỗi hệ thống")
+            this._alert.warning(this._translate.instant('alert.system_error'))
           }
         })
     }
   }
 
   removeFile() {
-    this._alert.confirm("Xoá", "Bạn có muốn xoá file", () => {
+    this._alert.confirm(this._translate.instant('common.delete'), this._translate.instant('alert.delete_data'), () => {
       this._file.removeFile(this.studentTask.filePathStudent ?? "").subscribe(res => {
         if (res) {
-          this._alert.successMin("Xoá file thành công");
+          this._alert.successMin(this._translate.instant('alert.delete_success'));
           this.studentTask.fileNameStudent = "";
           this.studentTask.filePathStudent = "";
         } else {
-          this._alert.warning("Lỗi hệ thống")
+          this._alert.warning(this._translate.instant('alert.system_error'))
         }
       })
     });

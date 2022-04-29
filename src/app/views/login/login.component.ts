@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Department } from 'src/app/core/models/department/depart';
 import { UserToken } from 'src/app/core/models/student/student';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -14,13 +15,22 @@ import { SweetalertService } from 'src/app/core/services/system/sweetalert.servi
 export class LoginComponent implements OnInit {
   mssv: string = '';
   departments: Department[] = [];
+
+  private alert_student_notFound!: string;
+  private alert_reload_page!: string;
+
+  title_studentId!: string;
   constructor(private _auth: AuthService,
     private readonly _departService: DepartmentService,
     private readonly _router: Router,
-    private readonly _sweetAlert: SweetalertService) { }
+    private readonly _sweetAlert: SweetalertService,
+    private _transalte: TranslateService) { 
+    
+    }
 
   ngOnInit() {
     this.getAllDepart();
+
   }
 
   login() {
@@ -34,7 +44,7 @@ export class LoginComponent implements OnInit {
           this._router.navigateByUrl("/");
         }, 200);
       } else {
-        this._sweetAlert.error("Mã số sinh viên không tìm thấy", "Trang tự reload sau 2 giây");
+        this._sweetAlert.error(this._transalte.instant('alert.student_notfound'),  this._transalte.instant('alert.reload_page'));
         setTimeout(() => {
           this._auth.sigOut();
         }, 3000);

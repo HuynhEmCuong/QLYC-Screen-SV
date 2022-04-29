@@ -1,10 +1,49 @@
 {
-  "alert": {},
-  "login-screen": {
-    "login": "Login"
+  "alert": {
+    "student_notfound": "Student ID not found",
+    "reload_page": "Auto reload after 2 seconds",
+    "request_type_validat": "Required request type",
+    "warning": "Warning",
+    "delete_data": "Do you want to delete data?",
+    "delete_success": "Delete successfully",
+    "system_error": "System error",
+    "request_not_delete": "The request has been processed and cannot be deleted",
+    "studentId_vailda": "Student id includes 10 digits",
+    "file_upload": "Please select a file maximum size 10Mb",
+    "file_pdf": "Please select a file *.pdf"
   },
-  "common":{
-    "language":"Language"
+  "login-screen": {
+    "login": "Login in"
+  },
+  "common": {
+    "language": "Language",
+    "home": "Home",
+    "contact": "Contact",
+    "student_id": "Student ID",
+    "choose": "Choose",
+    "delete": "Delete"
+  },
+  "home_screen": {
+    "title": "Request list",
+    "add": "Add",
+    "full_name": "Full name",
+    "request_type": "Request types",
+    "quantity": "Quantity",
+    "note": "Note",
+    "reuqest_date": "Request Date",
+    "info_account": "Account information",
+    "log_out": "Log out",
+    "dept": "School",
+    "mobi": "Phone number",
+    "save": "Save",
+    "request_add": "Add new request",
+    "student_note_attach": "Please attach the payment receipt:"
+  },
+  "status": {
+    "status": "Status",
+    "cancel": "Canceled",
+    "receive": "Received",
+    "process": "Processing",
+    "complete": "Completed"
   }
-  
 }

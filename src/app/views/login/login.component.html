@@ -8,14 +8,15 @@
                     <div class="login__field">
                         <fa-icon class="button__icon" [icon]="['fas', 'user-circle']"></fa-icon>
                         <input type="text" class="login__input" name="input" [(ngModel)]="mssv"
-                            placeholder="Mã số sinh viên" required minlength="10" maxlength="10" #input="ngModel">
+                            [placeholder]="'common.student_id'|translate" required minlength="10" maxlength="10"
+                            #input="ngModel">
 
                         <div *ngIf="input.invalid && (signInForm.submitted || input.touched) " class="alert">
                             <div *ngIf="input.errors?.['required']" class="error">
-                                Mã số sinh viên bắt buộc nhập
+                                {{'alert.student_notfound'|translate}}
                             </div>
                             <div *ngIf="input.errors?.['maxlength'] || input.errors?.['minlength']" class="error">
-                                Mã số sinh viên gồm 10 kí tự
+                                {{'alert.studentId_vailda'|translate}}
                             </div>
                         </div>
                     </div>

@@ -6,24 +6,24 @@
     <div class="row">
       <div id="main" class="col-12">
         <h1 class="title">
-          Danh Sách Yêu Cầu Dịch Vụ Đào Tạo
+          {{'home_screen.title'|translate}}
         </h1>
         <button class="btn btn-success btn-add" (click)="add.showModal()">
           <fa-icon [icon]="['fas', 'plus-square']"></fa-icon>
-          Thêm
+          {{'home_screen.add'|translate}}
         </button>
         <table class="table table-bordered text-left">
           <thead>
             <tr>
               <th scope="col">STT</th>
-              <th scope="col">Họ và Tên</th>
-              <th scope="col">Mã số sinh viên</th>
-              <th scope="col">Loại yêu cầu</th>
-              <th scope="col">Số lượng</th>
-              <th scope="col">Ghi chú</th>
-              <th scope="col">Ngày yêu cầu</th>
+              <th scope="col">{{'home_screen.full_name'|translate}}</th>
+              <th scope="col">{{'common.student_id'|translate}}</th>
+              <th scope="col">{{'home_screen.request_type'|translate}}</th>
+              <th scope="col">{{'home_screen.quantity'|translate}}</th>
+              <th scope="col">{{'home_screen.note'|translate}}</th>
+              <th scope="col">{{'home_screen.reuqest_date'|translate}}</th>
               <th scope="col" *ngIf=""> File</th>
-              <th scope="col">Trạng thái</th>
+              <th scope="col">{{'status.status'|translate}}</th>
               <th scope="col"></th>
             </tr>
           </thead>

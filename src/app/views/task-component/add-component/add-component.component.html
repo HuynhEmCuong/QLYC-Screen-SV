@@ -2,13 +2,13 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Thêm Yêu Cầu Mới</h4>
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">{{'home_screen.request_add'|translate}}</h4>
         <button type="button" class="btn-close close pull-right" (click)="lgModal.hide()" aria-label="Close">
           <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form name="form" novalidate #addForm="ngForm" >
+        <form name="form" novalidate #addForm="ngForm">
           <div class="form-group row ">
             <div class="col-md-8 col-12">
               <div class="input-group mb-3">
@@ -17,14 +17,14 @@
                 </div>
                 <select class="form-control" [(ngModel)]="requestTypeId" name="request" required
                   #selectRequest="ngModel" (ngModelChange)="getNoteRequestType($event)">
-                  <option value="">--Chọn--</option>
+                  <option value="">--{{'common.choose' |translate}}--</option>
                   <option *ngFor="let item of requestTypes" [value]="item.id">{{item.name}}</option>
                 </select>
 
               </div>
               <div *ngIf="selectRequest.invalid && (addForm.submitted || selectRequest.touched) ">
                 <div *ngIf="selectRequest.errors?.['required']" class="error">
-                  Loại yêu cầu bắt buộc chọn
+                  {{'alert.request_type_validat' |translate}}
                 </div>
               </div>
 
@@ -32,7 +32,7 @@
             <div class="col-md-4 col-12">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Số lượng</span>
+                  <span class="input-group-text" id="basic-addon1">{{'home_screen.quantity'|translate}}</span>
                 </div>
                 <select class="form-control" name="quantity" [(ngModel)]="studentTask.quantity">
                   <option *ngFor="let item of quantities" [value]="item.id">{{item.value}}</option>
@@ -48,8 +48,8 @@
             </div>
             <div class="col-12" *ngIf="requestTypeNote">
               <div class="file" *ngIf="studentTask.fileNameStudent =='' ;else infoFile ">
-                SV tải biên lai đóng tiền:
-                <label class="btn btn-upload"><span style="color: blue;"> <i class="fa fa-upload"></i> Tại đây</span> 
+                {{'home_screen.student_note_attach' |translate}}
+                <label class="btn btn-upload"><span style="color: blue;"> <i class="fa fa-upload"></i> Tại đây</span>
                   <input type="file" accept=".pdf" style="display: none" (change)="onSelectFile($event)" />
                 </label>
               </div>
@@ -60,7 +60,7 @@
             <div class="col-md-12">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1">Ghi chú</span>
+                  <span class="input-group-text" id="basic-addon1">{{'home_screen.note'|translate}}</span>
                 </div>
                 <textarea class="form-control" [(ngModel)]="studentTask.note" name="note"> </textarea>
               </div>
@@ -68,7 +68,7 @@
 
           </div>
           <div class="modal-footer">
-            <button class="btn btn-success" (click)="save(addForm)">Lưu</button>
+            <button class="btn btn-success" (click)="save(addForm)">{{'home_screen.save'|translate}}</button>
           </div>
         </form>
 

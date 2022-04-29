@@ -34,8 +34,8 @@ export class NavComponent implements OnInit {
   }
 
   switchLang(lang: string): void {
-    debugger
     localStorage.setItem('lang', lang);
     this._translate.use(lang);
+    window.location.reload()
   }
 }

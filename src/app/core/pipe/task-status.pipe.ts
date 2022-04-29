@@ -1,24 +1,25 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Pipe({
   name: 'taskstatus'
 })
 export class TaskStatusPipe implements PipeTransform {
-
+  constructor(private _translate: TranslateService) { }
   transform(value: any): any {
     let result = '';
     switch (value) {
       case 1:
-        result = 'Đã gửi';
+        result = this._translate.instant('status.receive');
         break;
       case 2:
-        result = 'Đang xử lý';
+        result = this._translate.instant('status.process');
         break;
       case 3:
-        result = 'Hoàn thành';
+        result =  this._translate.instant('status.complete');
         break;
       default:
-        result = 'Đã huỷ';
+        result =  this._translate.instant('status.cancel');
         break;
     }
     return result;
