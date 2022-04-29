@@ -10,7 +10,9 @@
     "request_not_delete": "The request has been processed and cannot be deleted",
     "studentId_vailda": "Student id includes 10 digits",
     "file_upload": "Please select a file maximum size 10Mb",
-    "file_pdf": "Please select a file *.pdf"
+    "file_pdf": "Please select a file *.pdf",
+    "file_validat":"File is not empty",
+    "no_request":"No request"
   },
   "login-screen": {
     "login": "Login in"
@@ -21,10 +23,11 @@
     "contact": "Contact",
     "student_id": "Student ID",
     "choose": "Choose",
-    "delete": "Delete"
+    "delete": "Delete",
+    "adress":"Nam Ky Khoi Nghia street, Hoa Phu war, Thu Dau Mot city, Binh DUong"
   },
   "home_screen": {
-    "title": "Request list",
+    "title": "List of requests",
     "add": "Add",
     "full_name": "Full name",
     "request_type": "Request types",
@@ -37,7 +40,8 @@
     "mobi": "Phone number",
     "save": "Save",
     "request_add": "Add new request",
-    "student_note_attach": "Please attach the payment receipt:"
+    "student_note_attach": "Please attach the payment receipt:",
+    "no":"No."
   },
   "status": {
     "status": "Status",

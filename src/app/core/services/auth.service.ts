@@ -24,6 +24,7 @@ export class AuthService {
 
   signWithGoogle(): Promise<boolean> {
     const method = this._serviceAuth.signIn(GoogleLoginProvider.PROVIDER_ID).then(async res => {
+      debugger
       let check = await this.setCurrentUser(res);
       return check;
     }, error => {

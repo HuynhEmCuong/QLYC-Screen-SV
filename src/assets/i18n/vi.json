@@ -8,21 +8,23 @@
     "delete_success": "Xoá thành công",
     "system_error": "Lỗi hệ thống",
     "request_not_delete": "Yêu cầu đã được xử lý không thể xoá",
-    "studentId_vailda":"Mã số sinh viên gồm 10 kí tự",
-    "file_upload":"Vui lòng chọn một tệp có kích thước tối đa 10M!",
-    "file_pdf":"Vui lòng tải file có đuôi *.pdf"
+    "studentId_vailda": "Mã số sinh viên gồm 10 kí tự",
+    "file_upload": "Vui lòng chọn một tệp có kích thước tối đa 10M!",
+    "file_pdf": "Vui lòng tải file có đuôi *.pdf",
+    "file_validat": "File không được để trống",
+    "no_request": "Hiện tại bạn chưa có yêu cầu nào"
   },
   "login-screen": {
     "login": "Đăng nhập"
-    
   },
   "common": {
-    "language": "Ngôn ngữ",
+    "language": "Language",
     "home": "Trang chủ",
     "contact": "Liên hệ",
     "student_id": "Mã số sinh viên",
-    "choose":"Chọn",
-    "delete": "Xoá"
+    "choose": "Chọn",
+    "delete": "Xoá",
+    "adress":"Đường Nam Kỳ Khởi Nghĩa, Phường Hòa Phú, Thành phố mới Bình Dương, Tỉnh Bình Dương"
   },
   "home_screen": {
     "title": "Danh sách yêu cầu dịch vụ đào tạo",
@@ -37,8 +39,9 @@
     "dept": "Khoa",
     "mobi": "Số điện thoai",
     "save": "Lưu",
-    "request_add":"Thêm yêu cầu mới",
-    "student_note_attach":"SV tải biên lai đóng tiền:"
+    "request_add": "Thêm yêu cầu mới",
+    "student_note_attach": "SV tải biên lai đóng tiền:",
+    "no": "STT"
   },
   "status": {
     "status": "Trạng thái",

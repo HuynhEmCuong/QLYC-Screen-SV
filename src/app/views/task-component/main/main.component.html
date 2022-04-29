@@ -15,7 +15,7 @@
         <table class="table table-bordered text-left">
           <thead>
             <tr>
-              <th scope="col">STT</th>
+              <th scope="col">{{'home_screen.no'|translate}}</th>
               <th scope="col">{{'home_screen.full_name'|translate}}</th>
               <th scope="col">{{'common.student_id'|translate}}</th>
               <th scope="col">{{'home_screen.request_type'|translate}}</th>
@@ -56,7 +56,7 @@
             </tr>
             <tr *ngIf="stuentTasks.length ==0">
               <td colspan="9" class="empty">
-                Hiện tại bạn chưa có yêu cầu nào
+                {{'alert.no_request' |translate}}
               </td>
             </tr>
           </tbody>

@@ -72,7 +72,7 @@ export class AddComponentComponent implements OnInit {
     this.studentTask.studentId = this.student.id;
     this.studentTask.requestId = +this.requestTypeId;
     if (this.studentTask.requestId == 13 && !this.studentTask.fileNameStudent) {
-      this._alert.warning("File không được để trống");
+      this._alert.warning(this._translate.instant('alert.file_validat'));
       return;
     }
     this._spiner.show();
