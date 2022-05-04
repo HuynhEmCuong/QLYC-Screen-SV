@@ -13,7 +13,7 @@
 
                         <div *ngIf="input.invalid && (signInForm.submitted || input.touched) " class="alert">
                             <div *ngIf="input.errors?.['required']" class="error">
-                                {{'alert.student_notfound'|translate}}
+                                {{'alert.student_required'|translate}}
                             </div>
                             <div *ngIf="input.errors?.['maxlength'] || input.errors?.['minlength']" class="error">
                                 {{'alert.studentId_vailda'|translate}}

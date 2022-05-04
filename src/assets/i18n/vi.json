@@ -12,7 +12,8 @@
     "file_upload": "Vui lòng chọn một tệp có kích thước tối đa 10M!",
     "file_pdf": "Vui lòng tải file có đuôi *.pdf",
     "file_validat": "File không được để trống",
-    "no_request": "Hiện tại bạn chưa có yêu cầu nào"
+    "no_request": "Hiện tại bạn chưa có yêu cầu nào",
+    "student_required":"Mã số sinh viên bắt buộc nhập"
   },
   "login-screen": {
     "login": "Đăng nhập"

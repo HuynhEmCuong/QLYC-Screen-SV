@@ -12,7 +12,8 @@
     "file_upload": "Please select a file maximum size 10Mb",
     "file_pdf": "Please select a file *.pdf",
     "file_validat":"File is not empty",
-    "no_request":"No request"
+    "no_request":"No request",
+    "student_required":"students are required to enter the student ID"
   },
   "login-screen": {
     "login": "Login in"
