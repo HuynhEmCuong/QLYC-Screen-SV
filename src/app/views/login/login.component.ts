@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.getAllDepart();
-
+    const check  =this._auth.isLoggeed();
+    if( check){
+      this._router.navigateByUrl("/");
+    }
   }
 
   login() {
@@ -52,6 +55,8 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
+  
 
   getAllDepart() {
     this._departService.getAll().subscribe(res => {
